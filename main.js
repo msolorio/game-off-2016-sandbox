@@ -1,4 +1,8 @@
 const Terminal = {
+	commandLog: [
+
+	],
+
 	dom: {},
 
 	getElements() {
@@ -8,25 +12,35 @@ const Terminal = {
 		this.dom.contentWrap = document.getElementById('js-contentWrap');
 	},
 
-	logToOutput() {
-		const consoleInput = this.dom.consoleInput;
+	logToOutput(command) {
 		const consoleOutput = this.dom.consoleOutput;
 		const newLine = document.createElement('li');
 
 		newLine.className = 'outputLine';
-		newLine.appendChild(document.createTextNode(`USER $ ${consoleInput.value}`));
+		newLine.appendChild(document.createTextNode(`USER $ ${command}`));
 		consoleOutput.appendChild(newLine);
+	},
+
+	addEntryToLog(command) {
+		const logLength = this.commandLog.length;
+		const entry = {
+			hash: logLength,
+			command: command
+		}
+		this.commandLog.push(entry);
 	},
 
 	bindInputEvents() {
 		const onKeyPress = function(event) {
 			const input = event.target;
+			const inputValue = input.value;
 
 			if (event.keyCode !== 13) return;
-			Terminal.logToOutput();
-			input.value = '';
-			Terminal.adjustContentPosition();
-		};
+				Terminal.logToOutput(inputValue);
+				input.value = '';
+				Terminal.adjustContentPosition();
+				Terminal.addEntryToLog(inputValue);
+			};
 
 		this.dom.consoleInput.addEventListener('keypress', onKeyPress);
 	},
