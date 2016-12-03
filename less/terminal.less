@@ -1,0 +1,83 @@
+@import './colors';
+.Game {
+  position: relative;
+  height: 100vh;
+}
+.Screen {
+  // height: 60vh; for dev
+  // height: 100vh; for dev
+}
+
+.Terminal {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  // height: 40vh; // for dev
+  height: 100vh; // for dev
+  padding: 20px 0;
+  background: @black;
+  color: @green;
+
+  ::selection {
+    color: @black;
+    background: @green;
+  }
+  .headline {
+    margin: 0 0 15px;
+  }
+  .consoleOutput,
+  .input,
+  .consolePrompt {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+
+  .consoleBox {
+    position: relative;
+    // height: ~"calc(40vh - 78px)"; // for dev
+    height: ~"calc(100vh - 78px)"; // for dev
+    padding: 4px 7px;
+    margin: 0 0 15px;
+    overflow-y: scroll;
+    // overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid @green;
+  }
+
+  .contentWrap {
+    min-height: 19px;
+  }
+
+  // .contentWrap.fixToBottom {
+  //   position: absolute;
+  //   width: 100%;
+  //   bottom: 4px;
+  // }
+
+  .consoleOutput {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .outputLine {
+    height: 19px;
+  }
+
+  .consolePrompt {
+    float: left;
+  }
+
+  .input {
+    float: left;
+    width: ~'calc(100% - 68px)';
+    padding: 0;
+    font-family: monospace;
+    color: @green;
+    border: none;
+    background: @black;
+    &:focus {
+      outline: none;
+    }
+  }
+}
